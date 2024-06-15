@@ -6,8 +6,7 @@ from Utils.CONSTANTS import CONST
 from Utils.Connect.ConnectSpark import Connect
 from Utils.DataOperation import DataOperation
 from Utils.ETL import ETL
-from Utils.Connect.ConnectSpark import Connect
-
+from Main.Transformation import Transformation
 
 
 def main(mode):
@@ -45,11 +44,29 @@ def main(mode):
         logging.info("Executing ETL process")
         ETL().eTL(spark)
 
-    # Log environment setup completion with time
-    logging.info("Environment setup completed.")
 
-    # Establish Spark session
-    spark = Connect().connectSpark()
-    logging.info("Spark session established.")
+    # Execute based on mode
+    elif mode == "Transformation" or mode == "New":
+        
+        """
+        only execute if the mode is Transformation or New
+        """
+        Transformation().transformation(spark)
+        logging.info("Transformation process completed.")
 
-    
+
+
+if __name__ == "__main__":
+
+    mode = "Dashboard"
+    logging.basicConfig(
+        filename=Config["LOGPATH"],
+        level=getattr(logging, Config["LOGGINGLEVEL"]),
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    logging.info("Mode selected: %s", mode)
+
+    #Cleanup the log file
+    with open(Config["LOGPATH"], 'w') as f:
+        f.write('')
+    main(mode)
