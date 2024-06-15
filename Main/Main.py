@@ -2,15 +2,23 @@ import logging
 import logging.config
 import os
 from Conf.Config import Config
+<<<<<<< HEAD
 from Utils.CONSTANTS import CONST
 from Utils.Connect.ConnectSpark import Connect
 from Utils.DataOperation import DataOperation
 from Utils.ETL import ETL
 
+=======
+from Utils.Connect.ConnectSpark import Connect
+
+
+    
+>>>>>>> main
 def main(mode):
     # Providing path of python to pyspark
     os.environ['PYSPARK_PYTHON'] = Config["PYTHONPATH"]
 
+<<<<<<< HEAD
     #Cleaning Cache
     DataOperation().pycacheCleanup()
 
@@ -41,4 +49,12 @@ def main(mode):
         logging.info("Executing ETL process")
         ETL().eTL(spark)
 
+=======
+    # Log environment setup completion with time
+    logging.info("Environment setup completed.")
+
+    # Establish Spark session
+    spark = Connect().connectSpark()
+    logging.info("Spark session established.")
+>>>>>>> main
     
