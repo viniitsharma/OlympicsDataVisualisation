@@ -7,12 +7,15 @@ from Utils.Connect.ConnectSpark import Connect
 from Utils.DataOperation import DataOperation
 from Utils.ETL import ETL
 from Main.Transformation import Transformation
+from Main.Dashboard import Dashboard
+from Utils.UtilsDashboard import UtilsDashboard
 
 
+
+    
 def main(mode):
     # Providing path of python to pyspark
     os.environ['PYSPARK_PYTHON'] = Config["PYTHONPATH"]
-
 
     #Cleaning Cache
     DataOperation().pycacheCleanup()
@@ -45,19 +48,53 @@ def main(mode):
         ETL().eTL(spark)
 
 
+
     # Execute based on mode
     elif mode == "Transformation" or mode == "New":
-        
         """
         only execute if the mode is Transformation or New
         """
         Transformation().transformation(spark)
-        logging.info("Transformation process completed.")
+        logging.info("ETL process completed.")
+
+    elif mode == "Dashboard":
+        """
+        only execute if the mode is Dashboard
+        """
+        logging.info("Starting Dashboard mode...")
+        
+        # Fetch the data required for the dashboard from HIVE
+        try:
+
+            map_data_pandas,bar_chart_data_pandas,most_gold_data_pandas,most_silver_data_pandas,most_bronze_data_pandas,most_total_medal_data_pandas,plotly_map = Dashboard().dashboard(spark)
+
+            logging.info("Data converted to Pandas DataFrames.")
+
+            dashboard = UtilsDashboard()
+            
+            # Set input data for the dashboard
+            dashboard.set_input_data(
+                map_data_pandas,
+                bar_chart_data_pandas,
+                most_gold_data_pandas,
+                most_silver_data_pandas,
+                most_bronze_data_pandas,
+                most_total_medal_data_pandas,
+                plotly_map
+            )
 
 
+            logging.info("Input data set for the dashboard.")
+
+            # Run the server
+            dashboard.run_server()
+            logging.info("Dashboard server started.")
+        except Exception as e:
+
+            logging.error("An error occurred while executing the Dashboard mode: %s", str(e))
+            raise
 
 if __name__ == "__main__":
-
     mode = "Dashboard"
     logging.basicConfig(
         filename=Config["LOGPATH"],
