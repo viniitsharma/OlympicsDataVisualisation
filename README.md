@@ -11,8 +11,11 @@ Create a Pyspark data pipeline with following steps:
 
 # Prerequisite:
 Python
+
 pyspark
+
 dash
+
 plotly
 
 # STEPSWISE APPROACH :
