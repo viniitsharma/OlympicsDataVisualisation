@@ -9,6 +9,12 @@ Create a Pyspark data pipeline with following steps:
 
 ![Alt text](TokyoWorkflow.jpg) 
 
+# Prerequisite:
+Python
+pyspark
+dash
+plotly
+
 # STEPSWISE APPROACH :
 ![Alt text](TokyoStepwise.jpg) 
 1. Execution start by providing the mode:
