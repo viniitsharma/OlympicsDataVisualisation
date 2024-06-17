@@ -1,5 +1,3 @@
-![Alt text](TokyoWorkflow.jpg) 
-
 # Objective :
 
 Create a Pyspark data pipeline with following steps:
@@ -9,6 +7,7 @@ Create a Pyspark data pipeline with following steps:
 4. Data Storage : Store the transformed data in a hive data warehouse.
 5. Data Visualisation : Visualise the data using Python Plotly dashboad.
 
+![Alt text](TokyoWorkflow.jpg) 
 
 # STEPSWISE APPROACH :
 ![Alt text](TokyoStepwise.jpg) 
@@ -22,63 +21,6 @@ Create a Pyspark data pipeline with following steps:
 
     d. Dashboard : The programe executes and the Dashboard pipeline and run the dashboard.
 
-# Directory Structure:
--Conf
-
-    -Config.py #contains the configuration data
-
--Data
-
-    -Athletes.xlsx
-
-    -Coaches.xlsx
-
-    -EntriesGender.xlsx
-
-    -Medals.xlsx
-
-    -Teams.xlsx
-
--Encodings
-
-    -CountryEncoding.json
-
--log
-
-    -log.txt
-
--Main
-
-    -.env
-
-    -Dashboard.py
-
-    -Main.py
-
-    -Transformation.py
-
--test
-
-    -Test_ETL.py
-
-    -Test_Operation.py
-
--Utils
-
-    -Connect
-
-        -ConnectSpark.py
-
-    -CONSTANTS.py
-
-    -DataOperation.py
-
-    -Encoding.py
-
-    -ETL.py
-
-    -FileOperations.py
-
-    -UtilsTransformation.py
-    
--requirements.txt
+# Execution :
+Execute the Main file by following command from the root directory:
+python -m Main.Main
